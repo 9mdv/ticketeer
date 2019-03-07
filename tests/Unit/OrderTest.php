@@ -6,6 +6,8 @@ use Tests\TestCase;
 use App\Concert;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\Order;
+use App\Reservation;
+use App\Ticket;
 
 class OrderTest extends TestCase
 {
