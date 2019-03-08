@@ -95,4 +95,9 @@ class Concert extends Model
     {
         return $this->tickets()->available()->count();
     }
+
+    public function hasPoster()
+    {
+        return false;
+    }
 }
