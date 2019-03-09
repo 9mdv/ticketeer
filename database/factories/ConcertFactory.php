@@ -5,16 +5,16 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Concert::class, function (Faker $faker) {
     return [
-        'title' => 'The Examples',
-        'subtitle' => 'with The Mini Band',
-        'date' => Carbon::parse('+2 weeks'),
-        'ticket_price' => 2000,
-        'venue' => 'Example Venue',
-        'venue_address' => '123 Sunset Avenue',
-        'city' => 'Fakeville',
+        'title' => 'Death Cab For Cutie',
+        'subtitle' => 'with Bombay Bicycle Club and Muse',
+        'date' => Carbon::parse('December 18, 2019 8:00pm'),
+        'ticket_price' => 3250,
+        'venue' => 'Launchpad 39A',
+        'venue_address' => '123 Sunset Drive',
+        'city' => 'Laraville',
         'state' => 'CA',
-        'zip' => '80000',
-        'additional_info' => 'More info sample'
+        'zip' => '90210',
+        'additional_info' => 'For tickets, call (555) 555-5555.'
     ];
 });
 
