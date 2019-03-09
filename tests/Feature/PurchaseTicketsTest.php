@@ -27,10 +27,25 @@ class PurchaseTicketsTest extends TestCase
         $this->app['request'] = $savedRequest;
     }
 
+    private function assertResponseStatus($status)
+    {
+        $this->response->assertStatus($status);
+    }
+
+    private function seeJsonSubset($data)
+    {
+        $this->response->assertJson($data);
+    }
+
+    private function decodeResponseJson()
+    {
+        return $this->response->decodeResponseJson();
+    }
+
     private function assertValidationError($field)
     {
         $this->response->assertStatus(422);
-        $this->response->assertSee($field, $this->response->decodeResponseJson());
+        $this->response->assertSee($field, $this->decodeResponseJson());
     }
 
     /** @test */
@@ -45,9 +60,9 @@ class PurchaseTicketsTest extends TestCase
             'payment_token' => $this->paymentGateway->getValidTestToken(),
         ]);
 
-        $this->response->assertStatus(201);
+        $this->assertResponseStatus(201);
 
-        $this->response->assertJson([
+        $this->seeJsonSubset([
             'email' => 'john@example.com',
             'ticket_quantity' => 3,
             'amount' => 9750,

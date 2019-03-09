@@ -14,7 +14,7 @@ class FakePaymentGateway implements PaymentGateway
 
     public function getValidTestToken()
     {
-        return 'valid_token';
+        return 'invalid-token';
     }
 
     public function charge($amount, $token)
@@ -30,6 +30,13 @@ class FakePaymentGateway implements PaymentGateway
         }
 
         $this->charges[] = $amount;
+    }
+
+    public function newChargesDuring($callback)
+    {
+        $chargesFrom = $this->charges->count();
+        $callback($this);
+        return $this->charges->slice($chargesFrom)->reverse()->values();
     }
 
     public function totalCharges()
