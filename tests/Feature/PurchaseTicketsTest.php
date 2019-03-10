@@ -7,6 +7,7 @@ use App\Billing\FakePaymentGateway;
 use Tests\TestCase;
 use App\Concert;
 use App\Billing\PaymentGateway;
+use App\OrderConfirmationNumberGenerator;
 
 class PurchaseTicketsTest extends TestCase
 {
@@ -51,9 +52,13 @@ class PurchaseTicketsTest extends TestCase
     /** @test */
     function customer_can_purchase_tickets_to_a_published_concert()
     {
+        $orderConfirmationNumberGenerator = \Mockery::mock(OrderConfirmationNumberGenerator::class, [
+            'generate' => 'ORDERCONFIRMATION123456',
+        ]);
+        $this->app->instance(OrderConfirmationNumberGenerator::class, $orderConfirmationNumberGenerator);
+
         $concert = factory(Concert::class)->states('published')->create(['ticket_price' => 3250])->addTickets(3);
 
-        // Act
         $this->orderTickets($concert, [
             'email' => 'john@example.com',
             'ticket_quantity' => 3,
@@ -63,6 +68,7 @@ class PurchaseTicketsTest extends TestCase
         $this->assertResponseStatus(201);
 
         $this->seeJsonSubset([
+            'confirmation_number' => 'ORDERCONFIRMATION123456',
             'email' => 'john@example.com',
             'ticket_quantity' => 3,
             'amount' => 9750,
