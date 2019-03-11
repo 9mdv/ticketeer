@@ -9,6 +9,8 @@ use App\Billing\PaymentFailedException;
 use App\Exceptions\NotEnoughTicketsException;
 use App\Order;
 use App\Reservation;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderConfirmationEmail;
 
 class ConcertOrderController extends Controller
 {
@@ -32,6 +34,9 @@ class ConcertOrderController extends Controller
         try {
             $reservation = $concert->reserveTickets(request('ticket_quantity'), request('email'));
             $order = $reservation->complete($this->paymentGateway, request('payment_token'));
+
+            Mail::to($order->email)->send(new OrderConfirmationEmail($order));
+
             return response()->json($order, 201);
         } catch (PaymentFailedException $e) {
             $reservation->cancel();
