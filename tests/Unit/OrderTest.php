@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Unit;
+
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
@@ -20,9 +22,9 @@ class OrderTest extends TestCase
     {
         $charge = new Charge(['amount' => 3600, 'card_last_four' => '1234']);
         $tickets = collect([
-            Mockery::spy(Ticket::class),
-            Mockery::spy(Ticket::class),
-            Mockery::spy(Ticket::class),
+            \Mockery::spy(Ticket::class),
+            \Mockery::spy(Ticket::class),
+            \Mockery::spy(Ticket::class),
         ]);
 
         $order = Order::forTickets($tickets, 'ned@gmail.com', $charge);

@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Feature;
+
 use Tests\TestCase;
 use App\Concert;
 use App\Order;

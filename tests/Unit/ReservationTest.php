@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Unit;
+
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
@@ -53,9 +55,9 @@ class ReservationTest extends TestCase
     function reserved_tickets_are_released_when_a_reservation_is_cancelled()
     {
         $tickets = collect([
-            Mockery::spy(Ticket::class),
-            Mockery::spy(Ticket::class),
-            Mockery::spy(Ticket::class),
+            \Mockery::spy(Ticket::class),
+            \Mockery::spy(Ticket::class),
+            \Mockery::spy(Ticket::class),
         ]);
         $reservation = new Reservation($tickets, 'john@gmail.com');
 
