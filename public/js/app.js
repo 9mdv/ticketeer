@@ -1869,7 +1869,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     openStripe: function openStripe(callback) {
       this.stripeHandler.open({
-        name: 'TicketBeast',
+        name: 'Ticketeer',
         description: this.description,
         currency: "usd",
         allowRememberMe: false,
