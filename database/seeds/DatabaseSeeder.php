@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             'zip' => '90210',
             'date' => Carbon::parse('December 18, 2019 8:00pm'),
             'ticket_price' => 3250,
+            'ticket_quantity' => 5,
             'additional_info' => 'For tickets, call (555) 555-5555.'
         ])->addTickets(10);
     }

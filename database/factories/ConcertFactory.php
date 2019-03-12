@@ -5,10 +5,14 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Concert::class, function (Faker $faker) {
     return [
+        'user_id' => function () {
+            return factory(App\User::class)->create()->id;
+        },
         'title' => 'Death Cab For Cutie',
         'subtitle' => 'with Bombay Bicycle Club and Muse',
         'date' => Carbon::parse('December 18, 2019 8:00pm'),
         'ticket_price' => 3250,
+        'ticket_quantity' => 5,
         'venue' => 'Launchpad 39A',
         'venue_address' => '123 Sunset Drive',
         'city' => 'Laraville',
