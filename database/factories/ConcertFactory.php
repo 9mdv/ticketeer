@@ -10,15 +10,15 @@ $factory->define(App\Concert::class, function (Faker $faker) {
         },
         'title' => 'Death Cab For Cutie',
         'subtitle' => 'with Bombay Bicycle Club and Muse',
+        'additional_info' => 'For tickets, call (555) 555-5555.',
         'date' => Carbon::parse('December 18, 2019 8:00pm'),
-        'ticket_price' => 3250,
-        'ticket_quantity' => 5,
         'venue' => 'Launchpad 39A',
         'venue_address' => '123 Sunset Drive',
         'city' => 'Laraville',
         'state' => 'CA',
         'zip' => '90210',
-        'additional_info' => 'For tickets, call (555) 555-5555.'
+        'ticket_price' => 5250,
+        'ticket_quantity' => 5,
     ];
 });
 

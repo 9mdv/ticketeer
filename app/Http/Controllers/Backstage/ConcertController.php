@@ -12,7 +12,11 @@ class ConcertController extends Controller
 {
     public function index()
     {
-        return view('backstage.concerts.index', ['concerts' => Auth::user()->concerts]);
+        return view('backstage.concerts.index', [
+            'concerts' => Auth::user()->concerts,
+            'publishedConcerts' => Auth::user()->concerts->filter->isPublished(),
+            'unpublishedConcerts' => Auth::user()->concerts->reject->isPublished(),
+        ]);
     }
 
     public function create()
@@ -25,6 +29,7 @@ class ConcertController extends Controller
         $this->validate(request(), [
             'title' => 'required',
             'subtitle' => 'nullable',
+            'additional_info' => 'nullable',
             'date' => 'required|date',
             'time' => 'required|date_format:g:ia',
             'venue' => 'required',
@@ -34,24 +39,23 @@ class ConcertController extends Controller
             'zip' => 'required',
             'ticket_price' => 'required|numeric|min:5',
             'ticket_quantity' => 'required|numeric|min:1',
-            'additional_info' => 'nullable',
         ]);
 
         $concert = Auth::user()->concerts()->create([
             'title' => request('title'),
             'subtitle' => request('subtitle'),
+            'additional_info' => request('additional_info'),
             'date' => Carbon::parse(vsprintf('%s %s', [
                 request('date'),
                 request('time'),
             ])),
-            'ticket_price' => request('ticket_price') * 100,
-            'ticket_quantity' => (int)request('ticket_quantity'),
             'venue' => request('venue'),
             'venue_address' => request('venue_address'),
             'city' => request('city'),
             'state' => request('state'),
             'zip' => request('zip'),
-            'additional_info' => request('additional_info'),
+            'ticket_price' => request('ticket_price') * 100,
+            'ticket_quantity' => (int)request('ticket_quantity'),
         ]);
 
         $concert->publish();
@@ -72,23 +76,22 @@ class ConcertController extends Controller
 
     public function update($id)
     {
-        $this->validate(request(), [
-            'title' => ['required'],
-        //     'date' => ['required', 'date'],
-        //     'time' => ['required', 'date_format:g:ia'],
-        //     'venue' => ['required'],
-        //     'venue_address' => ['required'],
-        //     'city' => ['required'],
-        //     'state' => ['required'],
-        //     'zip' => ['required'],
-        //     'ticket_price' => ['required', 'numeric', 'min:5'],
-        //     'ticket_quantity' => ['required', 'integer', 'min:1'],
-        ]);
-
         $concert = Auth::user()->concerts()->findOrFail($id);
 
         abort_if($concert->isPublished(), 403);
 
+        $this->validate(request(), [
+            'title' => 'required',
+            'date' => 'required|date',
+            'time' => 'required|date_format:g:ia',
+            'venue' => 'required',
+            'venue_address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zip' => 'required',
+            'ticket_price' => 'required|numeric|min:5',
+            'ticket_quantity' => 'required|integer|min:1',
+        ]);
 
         $concert->update([
             'title' => request('title'),
@@ -104,7 +107,7 @@ class ConcertController extends Controller
             'state' => request('state'),
             'zip' => request('zip'),
             'ticket_price' => request('ticket_price') * 100,
-            // 'ticket_quantity' => (int)request('ticket_quantity'),
+            'ticket_quantity' => (int)request('ticket_quantity'),
         ]);
 
         return redirect()->route('backstage.concerts.index');

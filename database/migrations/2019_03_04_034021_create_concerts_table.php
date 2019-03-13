@@ -18,15 +18,15 @@ class CreateConcertsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->string('title');
             $table->string('subtitle')->nullable();
+            $table->text('additional_info')->nullable();
             $table->datetime('date');
-            $table->integer('ticket_price');
-            $table->integer('ticket_quantity');
             $table->string('venue');
             $table->string('venue_address');
             $table->string('city');
             $table->string('state');
             $table->string('zip');
-            $table->text('additional_info')->nullable();
+            $table->integer('ticket_price');
+            $table->integer('ticket_quantity');
             $table->datetime('published_at')->nullable();
             $table->timestamps();
         });
