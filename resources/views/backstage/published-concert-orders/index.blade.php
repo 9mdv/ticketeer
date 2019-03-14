@@ -15,9 +15,9 @@
                 <a href="{{ route('backstage.published-concert-orders.index', $concert) }}" class="wt-bold inline-block m-xs-r-4">
                     Orders
                 </a>
-                <a href="{{ route('backstage.concert-messages.new', $concert) }}" class="inline-block">
+                {{-- <a href="{{ route('backstage.concert-messages.new', $concert) }}" class="inline-block">
                     Message Attendees
-                </a>
+                </a> --}}
             </div>
         </div>
     </div>
@@ -59,7 +59,7 @@
                 </div>
             </div>
         </div>
-        <div>
+        {{-- <div>
             <h2 class="m-xs-b-2 text-lg">Recent Orders</h2>
             <div class="card">
                 <div class="card-section">
@@ -93,7 +93,7 @@
                     @endif
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 @endsection
