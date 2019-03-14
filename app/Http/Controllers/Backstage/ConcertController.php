@@ -13,7 +13,6 @@ class ConcertController extends Controller
     public function index()
     {
         return view('backstage.concerts.index', [
-            'concerts' => Auth::user()->concerts,
             'publishedConcerts' => Auth::user()->concerts->filter->isPublished(),
             'unpublishedConcerts' => Auth::user()->concerts->reject->isPublished(),
         ]);
@@ -58,9 +57,7 @@ class ConcertController extends Controller
             'ticket_quantity' => (int)request('ticket_quantity'),
         ]);
 
-        $concert->publish();
-
-        return redirect()->route('concerts.show', $concert);
+        return redirect()->route('backstage.concerts.index');
     }
 
     public function edit($id)

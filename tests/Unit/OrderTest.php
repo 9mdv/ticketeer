@@ -50,13 +50,8 @@ class OrderTest extends TestCase
     /** @test */
     function retreiving_a_nonexistent_order_by_confirmation_number_throws_an_exception()
     {
-        try {
-            Order::findByConfirmationNumber('NONEXISTENTORDCONF123456');
-        } catch (ModelNotFoundException $e) {
-            return;
-        }
-
-        $this->fail('No matching order was found for specified confirmation number, but an exception was not thrown.');
+        $this->expectException(ModelNotFoundException::class);
+        Order::findByConfirmationNumber('NONEXISTENTORDCONF123456');
     }
 
     /** @test */

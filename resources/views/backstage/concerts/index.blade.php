@@ -65,11 +65,11 @@
                             </div>
                             <div>
                                 <a href="{{ route('backstage.concerts.edit', $concert) }}" class="btn btn-sm btn-secondary m-xs-r-2">Edit</a>
-                                {{-- <form class="inline-block" action="{{ route('backstage.published-concerts.store') }}" method="POST">
+                                <form class="inline-block" action="{{ route('backstage.published-concerts.store') }}" method="POST">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="concert_id" value="{{ $concert->id }}">
                                     <button type="submit" class="btn btn-sm btn-primary">Publish</button>
-                                </form> --}}
+                                </form>
                             </div>
                         </div>
                     </div>

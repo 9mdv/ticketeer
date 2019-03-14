@@ -29,7 +29,7 @@
 
     <footer class="bg-dark p-xs-y-6 text-light-muted">
         <div class="container">
-            <p class="text-center">&copy; TicketBeast {{ date('Y') }}</p>
+            <p class="text-center">&copy; Ticketeer {{ date('Y') }}</p>
         </div>
     </footer>
 </div>
