@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Backstage;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,7 +13,7 @@ class PublishedConcertOrderController extends Controller
 
         return view('backstage.published-concert-orders.index', [
             'concert' => $concert,
-            // 'orders' => $concert->orders()->latest()->take(10)->get(),
+            'orders' => $concert->orders()->latest()->take(10)->get(),
         ]);
     }
 }

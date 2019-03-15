@@ -59,7 +59,7 @@
                 </div>
             </div>
         </div>
-        {{-- <div>
+        <div>
             <h2 class="m-xs-b-2 text-lg">Recent Orders</h2>
             <div class="card">
                 <div class="card-section">
@@ -93,7 +93,7 @@
                     @endif
                 </div>
             </div>
-        </div> --}}
+        </div>
     </div>
 </div>
 @endsection
