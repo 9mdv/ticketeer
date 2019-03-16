@@ -127,6 +127,6 @@ class Concert extends Model
 
     public function hasPoster()
     {
-        return false;
+        return $this->poster_image_path !== null;
     }
 }
