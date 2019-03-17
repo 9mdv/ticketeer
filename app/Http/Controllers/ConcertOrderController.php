@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Billing\PaymentGateway;
 use App\Concert;
-use App\Billing\PaymentFailedException;
-use App\Exceptions\NotEnoughTicketsException;
-use App\Order;
-use App\Reservation;
+use App\Billing\PaymentGateway;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderConfirmationEmail;
+use App\Billing\PaymentFailedException;
+use App\Exceptions\NotEnoughTicketsException;
 
 class ConcertOrderController extends Controller
 {
@@ -25,7 +22,7 @@ class ConcertOrderController extends Controller
     {
         $concert = Concert::published()->findOrFail($concertId);
 
-        $this->validate(request(), [
+        request()->validate([
             'email' => 'required|email',
             'ticket_quantity' => 'required|integer|min:1',
             'payment_token' => 'required',

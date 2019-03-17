@@ -25,7 +25,7 @@ class ConcertController extends Controller
 
     public function store()
     {
-        $this->validate(request(), [
+        request()->validate([
             'title' => 'required',
             'subtitle' => 'nullable',
             'additional_info' => 'nullable',
@@ -81,7 +81,7 @@ class ConcertController extends Controller
 
         abort_if($concert->isPublished(), 403);
 
-        $this->validate(request(), [
+        request()->validate([
             'title' => 'required',
             'date' => 'required|date',
             'time' => 'required|date_format:g:ia',

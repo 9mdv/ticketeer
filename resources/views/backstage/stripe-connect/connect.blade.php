@@ -7,7 +7,7 @@
             <div class="card p-xs-6">
                 <h1 class="text-xl wt-light text-center m-xs-b-6">Connect your Stripe account</h1>
                 <p class="m-xs-b-6">
-                    Good news, TicketBeast now integrates directly with your Stripe account!
+                    Good news, Ticketeer now integrates directly with your Stripe account!
                 </p>
                 <p class="m-xs-b-6">
                     To continue, connect your Stripe account by clicking the button below:

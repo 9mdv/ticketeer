@@ -7,7 +7,7 @@
             <div class="container">
                 <div class="navbar-content">
                     <div>
-                        <img src="/img/logo.svg" alt="TicketBeast" style="height: 2.5rem;">
+                        <img src="/img/logo.svg" alt="Ticketeer" style="height: 2.5rem;">
                     </div>
                     <div>
                         <a href="{{ route('backstage.concerts.index') }}" class="link link-light m-xs-r-6">

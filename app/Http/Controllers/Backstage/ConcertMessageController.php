@@ -19,7 +19,7 @@ class ConcertMessageController extends Controller
     {
         $concert = Auth::user()->concerts()->findOrFail($id);
 
-        $this->validate(request(), [
+        request()->validate([
             'subject' => 'required',
             'message' => 'required',
         ]);

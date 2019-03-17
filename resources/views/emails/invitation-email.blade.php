@@ -1,4 +1,4 @@
-<p>You're invited to promote your concerts on TicketBeast!</p>
+<p>You're invited to promote your concerts on Ticketeer!</p>
 
 <p>
     Visit this link to create your account:

@@ -179,9 +179,14 @@ class EditConcertTest extends TestCase
         $response = $this->actingAs($user)->patch("/backstage/concerts/{$concert->id}", $this->validParams());
 
         $response->assertStatus(404);
-        $this->assertArraySubset($this->oldAttributes([
-            'user_id' => $otherUser->id,
-        ]), $concert->fresh()->getAttributes());
+        // assertArraySubset equivalent
+        $this->assertTrue(
+            empty(array_diff_assoc($this->oldAttributes([
+                'user_id' => $otherUser->id,
+            ]), $concert->fresh()->getAttributes())) && empty(array_diff_assoc($this->oldAttributes([
+                'user_id' => $otherUser->id,
+            ]), $concert->fresh()->getAttributes()))
+        );
     }
 
     /** @test */
@@ -196,9 +201,14 @@ class EditConcertTest extends TestCase
         $response = $this->actingAs($user)->patch("/backstage/concerts/{$concert->id}", $this->validParams());
 
         $response->assertStatus(403);
-        $this->assertArraySubset($this->oldAttributes([
-            'user_id' => $user->id,
-        ]), $concert->fresh()->getAttributes());
+        // assertArraySubset equivalent
+        $this->assertTrue(
+            empty(array_diff_assoc($this->oldAttributes([
+                'user_id' => $user->id,
+            ]), $concert->fresh()->getAttributes())) && empty(array_diff_assoc($this->oldAttributes([
+                'user_id' => $user->id,
+            ]), $concert->fresh()->getAttributes()))
+        );
     }
 
     /** @test */
@@ -213,9 +223,14 @@ class EditConcertTest extends TestCase
         $response = $this->patch("/backstage/concerts/{$concert->id}", $this->validParams());
 
         $response->assertRedirect('/login');
-        $this->assertArraySubset($this->oldAttributes([
-            'user_id' => $user->id,
-        ]), $concert->fresh()->getAttributes());
+        // assertArraySubset equivalent
+        $this->assertTrue(
+            empty(array_diff_assoc($this->oldAttributes([
+                'user_id' => $user->id,
+            ]), $concert->fresh()->getAttributes())) && empty(array_diff_assoc($this->oldAttributes([
+                'user_id' => $user->id,
+            ]), $concert->fresh()->getAttributes()))
+        );
     }
 
     /** @test */
