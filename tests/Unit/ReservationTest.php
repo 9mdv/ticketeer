@@ -2,18 +2,16 @@
 
 namespace Tests\Unit;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Tests\TestCase;
-use App\Concert;
-use App\Reservation;
 use App\Ticket;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use App\Concert;
+use Tests\TestCase;
+use App\Reservation;
 use App\Billing\FakePaymentGateway;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ReservationTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     function calculating_the_total_cost()
@@ -76,11 +74,11 @@ class ReservationTest extends TestCase
         $reservation = new Reservation($tickets, 'ned@gmail.com');
         $paymentGateway = new FakePaymentGateway;
 
-        $order = $reservation->complete($paymentGateway, $paymentGateway->getValidTestToken());
+        $order = $reservation->complete($paymentGateway, $paymentGateway->getValidTestToken(), 'test_acct_1234');
 
         $this->assertEquals('ned@gmail.com', $order->email);
         $this->assertEquals(3, $order->ticketQuantity());
         $this->assertEquals(3600, $order->amount);
-        $this->assertEquals(3600, $paymentGateway->totalCharges());
+        $this->assertEquals(3600, $paymentGateway->totalChargesFor('test_acct_1234'));
     }
 }

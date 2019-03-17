@@ -5,7 +5,6 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class InvitationEmail extends Mailable
 {
@@ -31,6 +30,6 @@ class InvitationEmail extends Mailable
     public function build()
     {
         return $this->view('emails.invitation-email')
-            ->subject("You're invited to join TicketBeast!");
+            ->subject("You're invited to join Ticketeer!");
     }
 }

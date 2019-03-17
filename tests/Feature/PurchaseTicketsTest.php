@@ -2,20 +2,20 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use App\Billing\FakePaymentGateway;
-use Tests\TestCase;
+use App\User;
 use App\Concert;
-use App\Billing\PaymentGateway;
-use App\OrderConfirmationNumberGenerator;
-use App\Facades\OrderConfirmationNumber;
+use Tests\TestCase;
 use App\Facades\TicketCode;
-use Illuminate\Support\Facades\Mail;
+use App\Billing\PaymentGateway;
+use App\Billing\FakePaymentGateway;
 use App\Mail\OrderConfirmationEmail;
+use Illuminate\Support\Facades\Mail;
+use App\Facades\OrderConfirmationNumber;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PurchaseTicketsTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     protected function setUp(): void
     {
@@ -60,10 +60,12 @@ class PurchaseTicketsTest extends TestCase
         OrderConfirmationNumber::shouldReceive('generate')->andReturn('ORDERCONFIRMATION123456');
         TicketCode::shouldReceive('generateFor')->andReturn('TICKETCODE1', 'TICKETCODE2', 'TICKETCODE3');
 
-        // $concert = factory(Concert::class)->create(['ticket_price' => 3250, 'ticket_quantity' => 3]);
-        // $concert->publish();
-
-        $concert = \ConcertFactory::createPublished(['ticket_price' => 3250, 'ticket_quantity' => 3]);
+        $user = factory(User::class)->create(['stripe_account_id' => 'test_acct_1234']);
+        $concert = \ConcertFactory::createPublished([
+            'ticket_price' => 3250,
+            'ticket_quantity' => 3,
+            'user_id' => $user,
+        ]);
 
         $this->orderTickets($concert, [
             'email' => 'john@example.com',
@@ -84,7 +86,7 @@ class PurchaseTicketsTest extends TestCase
             ],
         ]);
 
-        $this->assertEquals(9750, $this->paymentGateway->totalCharges());
+        $this->assertEquals(9750, $this->paymentGateway->totalChargesFor('test_acct_1234'));
         $this->assertTrue($concert->hasOrderFor('john@example.com'));
 
         $order = $concert->ordersFor('john@example.com')->first();

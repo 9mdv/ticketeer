@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\ForceStripeAccount;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,15 +30,21 @@ Route::post('/register', 'Auth\RegisterController@register')->name('auth.registe
 Route::get('/invitations/{code}', 'InvitationsController@show')->name('invitations.show');
 
 Route::middleware('auth')->prefix('backstage')->namespace('Backstage')->group(function () {
-    Route::get('/concerts', 'ConcertController@index')->name('backstage.concerts.index');
-    Route::get('/concerts/new', 'ConcertController@create')->name('backstage.concerts.new');
-    Route::post('/concerts', 'ConcertController@store');
-    Route::get('/concerts/{id}/edit', 'ConcertController@edit')->name('backstage.concerts.edit');
-    Route::patch('/concerts/{id}', 'ConcertController@update')->name('backstage.concerts.update');
+    Route::middleware(ForceStripeAccount::class)->group(function () {
+        Route::get('/concerts', 'ConcertController@index')->name('backstage.concerts.index');
+        Route::get('/concerts/new', 'ConcertController@create')->name('backstage.concerts.new');
+        Route::post('/concerts', 'ConcertController@store')->name('backstage.concerts.store');
+        Route::get('/concerts/{id}/edit', 'ConcertController@edit')->name('backstage.concerts.edit');
+        Route::patch('/concerts/{id}', 'ConcertController@update')->name('backstage.concerts.update');
 
-    Route::get('/published-concerts/{id}/orders', 'PublishedConcertOrderController@index')->name('backstage.published-concert-orders.index');
-    Route::post('/published-concerts', 'PublishedConcertController@store')->name('backstage.published-concerts.store');
+        Route::get('/published-concerts/{id}/orders', 'PublishedConcertOrderController@index')->name('backstage.published-concert-orders.index');
+        Route::post('/published-concerts', 'PublishedConcertController@store')->name('backstage.published-concerts.store');
 
-    Route::get('/concerts/{id}/messages/new', 'ConcertMessageController@create')->name('backstage.concert-messages.new');
-    Route::post('/concerts/{id}/messages', 'ConcertMessageController@store')->name('backstage.concert-messages.store');
+        Route::get('/concerts/{id}/messages/new', 'ConcertMessageController@create')->name('backstage.concert-messages.new');
+        Route::post('/concerts/{id}/messages', 'ConcertMessageController@store')->name('backstage.concert-messages.store');
+    });
+
+    Route::get('/stripe-connect/connect', 'StripeConnectController@connect')->name('backstage.stripe-connect.connect');
+    Route::get('/stripe-connect/authorize', 'StripeConnectController@authorizeRedirect')->name('backstage.stripe-connect.authorize');
+    Route::get('/stripe-connect/redirect', 'StripeConnectController@redirect')->name('backstage.stripe-connect.redirect');
 });
