@@ -1,20 +1,19 @@
 <?php
 
-use Illuminate\Support\Carbon;
-use Faker\Generator as Faker;
+use Carbon\Carbon;
 
-$factory->define(App\Concert::class, function (Faker $faker) {
+$factory->define(App\Concert::class, function () {
     return [
         'user_id' => function () {
             return factory(App\User::class)->create()->id;
         },
-        'title' => 'Death Cab For Cutie',
-        'subtitle' => 'with Bombay Bicycle Club and Muse',
-        'additional_info' => 'For tickets, call (555) 555-5555.',
+        'title' => 'Example Band',
+        'subtitle' => 'with The Openers',
+        'additional_info' => 'Some sample additional information.',
         'date' => Carbon::parse('December 18, 2019 8:00pm'),
-        'venue' => 'Launchpad 39A',
-        'venue_address' => '123 Sunset Drive',
-        'city' => 'Laraville',
+        'venue' => 'The Example Theatre',
+        'venue_address' => '123 Example Lane',
+        'city' => 'Fakeville',
         'state' => 'CA',
         'zip' => '90210',
         'ticket_price' => 5250,
@@ -22,13 +21,13 @@ $factory->define(App\Concert::class, function (Faker $faker) {
     ];
 });
 
-$factory->state(App\Concert::class, 'published', function (Faker $faker) {
+$factory->state(App\Concert::class, 'published', function () {
     return [
         'published_at' => Carbon::parse('-1 week')
     ];
 });
 
-$factory->state(App\Concert::class, 'unpublished', function (Faker $faker) {
+$factory->state(App\Concert::class, 'unpublished', function () {
     return [
         'published_at' => null
     ];

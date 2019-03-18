@@ -6,11 +6,11 @@ use App\User;
 use App\Concert;
 use Tests\TestCase;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class EditConcertTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     private function oldAttributes($overrides = [])
     {
@@ -179,7 +179,7 @@ class EditConcertTest extends TestCase
         $response = $this->actingAs($user)->patch("/backstage/concerts/{$concert->id}", $this->validParams());
 
         $response->assertStatus(404);
-        // assertArraySubset equivalent
+        // assertArraySubset equivalent [https://github.com/sebastianbergmann/phpunit/issues/3494#issuecomment-471329317]
         $this->assertTrue(
             empty(array_diff_assoc($this->oldAttributes([
                 'user_id' => $otherUser->id,
@@ -201,7 +201,7 @@ class EditConcertTest extends TestCase
         $response = $this->actingAs($user)->patch("/backstage/concerts/{$concert->id}", $this->validParams());
 
         $response->assertStatus(403);
-        // assertArraySubset equivalent
+        // assertArraySubset equivalent [https://github.com/sebastianbergmann/phpunit/issues/3494#issuecomment-471329317]
         $this->assertTrue(
             empty(array_diff_assoc($this->oldAttributes([
                 'user_id' => $user->id,
@@ -223,7 +223,7 @@ class EditConcertTest extends TestCase
         $response = $this->patch("/backstage/concerts/{$concert->id}", $this->validParams());
 
         $response->assertRedirect('/login');
-        // assertArraySubset equivalent
+        // assertArraySubset equivalent [https://github.com/sebastianbergmann/phpunit/issues/3494#issuecomment-471329317]
         $this->assertTrue(
             empty(array_diff_assoc($this->oldAttributes([
                 'user_id' => $user->id,

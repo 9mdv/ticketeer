@@ -7,12 +7,10 @@ use App\Concert;
 use App\Order;
 use App\Ticket;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ViewOrderTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     function user_can_view_their_order_confirmation()
@@ -53,11 +51,11 @@ class ViewOrderTest extends TestCase
         $response->assertSee('**** **** **** 1881');
         $response->assertSee('TIX1234');
         $response->assertSee('TIX123456');
-        $response->assertSee('Death Cab For Cutie');
-        $response->assertSee('with Bombay Bicycle Club and Muse');
-        $response->assertSee('Launchpad 39A');
-        $response->assertSee('123 Sunset Drive');
-        $response->assertSee('Laraville, CA');
+        $response->assertSee('Example Band');
+        $response->assertSee('with The Openers');
+        $response->assertSee('The Example Theatre');
+        $response->assertSee('123 Example Lane');
+        $response->assertSee('Fakeville, CA');
         $response->assertSee('90210');
         $response->assertSee('khal@gmail.com');
         $response->assertSee('2019-12-18 20:00');
