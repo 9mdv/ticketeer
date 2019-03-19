@@ -2,20 +2,14 @@
 
 namespace Tests\Feature\Backstage;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
-use App\Concert;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\TestResponse;
-use Illuminate\Database\Eloquent\Collection;
-use PHPUnit\Framework\Assert;
+use Tests\TestCase;
 use ConcertFactory;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ViewConcertListTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     function guests_cannot_view_a_promoters_concert_list()

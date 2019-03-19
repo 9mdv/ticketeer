@@ -2,7 +2,6 @@
 
 namespace Tests\Unit\Mail;
 
-use App\Order;
 use Tests\TestCase;
 use App\AttendeeMessage;
 use App\Mail\AttendeeMessageEmail;

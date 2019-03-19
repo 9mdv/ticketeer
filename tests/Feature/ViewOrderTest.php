@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use App\Concert;
 use App\Order;
 use App\Ticket;
+use App\Concert;
+use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ViewOrderTest extends TestCase

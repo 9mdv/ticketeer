@@ -2,8 +2,6 @@
 
 namespace Tests;
 
-use Exception;
-use App\Exceptions\Handler;
 use PHPUnit\Framework\Assert;
 use Illuminate\Foundation\Testing\TestResponse;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;

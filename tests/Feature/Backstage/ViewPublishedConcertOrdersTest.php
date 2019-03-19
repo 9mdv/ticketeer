@@ -7,11 +7,11 @@ use OrderFactory;
 use Carbon\Carbon;
 use ConcertFactory;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ViewPublishedConcertOrdersTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     function a_promoter_can_view_the_orders_of_their_own_published_concert()

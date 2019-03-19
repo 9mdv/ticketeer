@@ -2,16 +2,14 @@
 
 namespace Tests\Feature\Backstage;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
+use Tests\TestCase;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PromoterLoginTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     function logging_in_with_valid_credentials()

@@ -9,11 +9,11 @@ use App\AttendeeMessage;
 use App\Jobs\SendAttendeeMessage;
 use App\Mail\AttendeeMessageEmail;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SendAttendeeMessageTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     function it_sends_the_message_to_all_concert_attendees()

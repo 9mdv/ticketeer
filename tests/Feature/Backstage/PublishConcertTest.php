@@ -5,11 +5,11 @@ namespace Tests\Feature\Backstage;
 use App\User;
 use App\Concert;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PublishConcertTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     function a_promoter_can_publish_their_own_concert()

@@ -2,14 +2,14 @@
 
 namespace Tests\Browser;
 
+use App\User;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PromoterLoginTest extends DuskTestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     public function logging_in_successfully()
