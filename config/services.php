@@ -39,6 +39,10 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
         'client_id' => env('STRIPE_CLIENT_ID'),
+        'test' => [
+            'promoter_id' => env('STRIPE_TEST_PROMOTER_ID'),
+            'promoter_token' => env('STRIPE_TEST_PROMOTER_TOKEN'),
+        ],
         'webhook' => [
             'secret' => env('STRIPE_WEBHOOK_SECRET'),
             'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
