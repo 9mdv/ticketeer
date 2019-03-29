@@ -2,19 +2,15 @@
 
 namespace Tests\Unit;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Tests\TestCase;
-use App\Concert;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use App\Ticket;
-use Carbon\Carbon;
 use App\Order;
+use App\Ticket;
+use Tests\TestCase;
 use App\Facades\TicketCode;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TicketTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     function a_ticket_can_be_reserved()

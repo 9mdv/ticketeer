@@ -2,18 +2,17 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Concert;
-use Illuminate\Support\Carbon;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use App\Exceptions\NotEnoughTicketsException;
-use App\Ticket;
 use App\Order;
+use App\Ticket;
+use App\Concert;
+use Tests\TestCase;
+use Illuminate\Support\Carbon;
+use App\Exceptions\NotEnoughTicketsException;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ConcertTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     function can_get_formatted_date()

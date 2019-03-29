@@ -2,20 +2,16 @@
 
 namespace Tests\Unit;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Tests\TestCase;
-use App\Concert;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\Order;
-use App\Reservation;
 use App\Ticket;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Tests\TestCase;
 use App\Billing\Charge;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class OrderTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     function creating_an_order_from_tickets_email_and_charge()

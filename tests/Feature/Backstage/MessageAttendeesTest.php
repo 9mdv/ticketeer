@@ -8,11 +8,11 @@ use Tests\TestCase;
 use App\AttendeeMessage;
 use App\Jobs\SendAttendeeMessage;
 use Illuminate\Support\Facades\Queue;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class MessageAttendeesTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     function a_promoter_can_view_the_message_form_for_their_own_concert()

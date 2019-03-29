@@ -2,11 +2,9 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\HashidsTicketCodeGenerator;
 use App\Ticket;
+use Tests\TestCase;
+use App\HashidsTicketCodeGenerator;
 
 class HashidsTicketCodeGeneratorTest extends TestCase
 {
